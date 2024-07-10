@@ -1,0 +1,529 @@
+
+/* 
+Nguyên tắc:
+1. Làm từ ngoài vào trong
+2. Làm từ trên xuống dưới
+3. Làm từ tổng quan đến chi tiết
+*/
+
+/* 
+Các câu hỏi để xác định việc cần làm trong các thành phần:
+1. Vị trí
+2. Kích thước (width, height)
+3. Màu sắc
+4. Kiểu dáng (kiểu chữ, hình tròn, vuông,...)
+*/
+
+/* Reset CSS */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* ------------------------------------------------------- */
+
+html {
+    scroll-behavior: smooth;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* ------------------------------------------------------- */
+/* Common */
+/* Các class dùng lại nhiều lần */
+/* Class clear dùng để fix lỗi 1 class không ôm đc các class con do trong class con có sử dụng float */
+
+.text-white {
+    color: #fff !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.mt-8 {
+    margin-top: 8px !important;
+}
+
+.mt-16 {
+    margin-top: 16px !important;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.uppercase {
+    text-transform: uppercase !important;
+}
+
+.btn {
+    display: inline-block;
+    border: none;
+    margin-top: 16px;
+    padding: 10px 16px;
+    color: #fff;
+    font-weight: 500;
+    background-color: #000;
+    text-decoration: none;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #ccc;
+    color: #000;
+}
+
+.row {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+/* Tạo class giả có thuộc tính clear dùng để fix lỗi 1 class cha không ôm đc các class con (do trong class con có sử dụng float) */
+/* afer: thêm class giả này vào cuối class row */
+.row::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.col {
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.col-full {
+    width: 100%;
+}
+
+.col-half {
+    width: 50%;
+}
+
+.col-third {
+    width: calc(100% / 3);
+}
+
+/* ------------------------------------------------------- */
+
+#main {
+    overflow: hidden;
+}
+/* ------------------------------------------------------- */
+
+#header {
+    height: 46px;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    background-color: #000;
+    z-index: 1;
+    overflow: hidden;
+}
+/* ------------------------------------------------------- */
+
+#nav {
+    display: inline-block;
+}
+
+#nav, .subnav {
+    list-style-type: none;
+}
+
+#nav > li {
+    display: inline-block;
+}
+
+#nav li {
+    position: relative;
+}
+
+#nav li:hover .subnav {
+    display: block;
+}
+
+#nav > li > a {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+#nav li a{
+    text-decoration: none;
+    line-height: 46px;
+    padding: 0 24px;
+    display: block;
+}
+
+#nav > li:hover > a, 
+#nav .subnav li:hover a{
+    cursor: pointer;
+    color: #000;
+    background-color: #ccc;
+}
+
+#nav .subnav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#nav .nav-angle-down {
+    font-size: 14px;
+}
+
+#nav .subnav a {
+    color: #000;
+    padding: 0 12px;
+    line-height: 38px;
+}
+/* ------------------------------------------------------- */
+
+#header .search-btn,
+#header .mobile-menu-btn {
+    float: right;
+    padding: 0 24px;
+}
+
+#header .search-btn:hover {
+    cursor: pointer;
+    background-color: #f44336;
+}
+
+#header .mobile-menu-btn:hover {
+    background-color: #ccc;
+}
+
+#header .mobile-menu-btn:hover .menu-icon {
+    color: #000;
+}
+#header .menu-icon,
+#header .search-icon {
+    color: #fff;
+    font-weight: bolder;
+    line-height: 46px;
+}
+/* ------------------------------------------------------- */
+
+#slider {
+    margin-top: 46px;
+    padding-top: 50%;
+    position: relative;
+    /* url: bg-img, top center: bg-position, cover: bg-size, no-repeat: bg-repeat */
+    background: url(../img/slider/chicago.jpg) top center / cover no-repeat;
+}  
+#slider .text-content {
+    position: absolute;
+    bottom: 48px;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+}
+
+#slider .text-heading {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+#slider .text-description {
+    font-size: 15px;
+    margin-top: 25px;
+}
+/* ------------------------------------------------------- */
+
+#content {
+
+}
+
+/* About Section */
+#content .content-section {
+    width: 800px;
+    max-width: 100%;
+    /* padding trai phai = 16px, tren = 64px, duoi = 112px */
+    padding: 64px 16px 112px;
+    /* margin tren duoi = 0; trai phai = auto */
+    margin: 0 auto;
+}
+
+#content .section-heading {
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#content .section-sub-heading {
+    padding-top: 25px;
+    font-size: 15px;
+    font-style: italic;
+    text-align: center;
+    /* Thuoc tinh do trong suot cua chu: opacity (gia tri tu 0-1) */
+    opacity: 0.7;
+}
+
+#content .about-text {
+    padding-top: 25px;
+    font-size: 15px;
+    text-align: justify;
+    line-height: 1.4;
+}
+
+#content .member-list {
+    margin-top: 48px;
+}
+
+#content .member-name {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#content .member-img {
+    width: 160px;
+    height: 200px;
+    margin-top: 15px;
+    border-radius: 4px;
+}
+
+/* Tour Section */
+#content .tour-section {
+    background-color: #000;
+}
+
+/* Tickets */
+#content .tickets-list {
+    margin-top: 40px;
+    background-color: #fff;
+    list-style-type: none;
+}
+
+#content .tickets-list li {
+    color: #757575;
+    font-size: 15px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+#content .tickets-list .sold-out {
+    background-color: #f44336;
+    color: #fff;
+    padding: 2px 6px;
+    float: right;
+    margin-top: -2px;
+    box-shadow: 0 0 10px rgba(219, 18, 18, 0.5);
+}
+
+#content .tickets-list .quantity {
+    float: right;
+    width: 30px;
+    height: 30px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-top: -5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Places */
+#content .places-list {
+    margin-top: 32px;
+}
+
+#content .places-img {
+    width: 100%;
+    display: block;
+
+}
+
+#content .places-img:hover {
+    opacity: 0.5;
+}
+
+#content .places-body {
+    padding: 16px;
+    background-color: #fff;
+    font-size: 15px;
+}
+
+#content .places-heading {
+    font-weight: 640;
+    font-size: 20px;
+
+}
+
+#content .places-time {
+    margin-top: 16px;
+    color: #757575;
+}
+
+#content .places-decs {
+    margin-top: 16px;
+    line-height: 1.4;
+}
+
+/* Contact form*/
+.contact-content {
+    margin-top: 48px;
+}
+
+.contact-info {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* CSS nâng cao:  i[class*="ti-"] là css vào các thẻ i có class có chứa "ti-*/
+.contact-info i[class*="ti-"] {
+    width: 30px;
+    display: inline-block;
+}
+
+.contact-form {
+    font-size: 15px;
+}
+
+.contact-form .form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+/* Map */
+.map-section img {
+    width: 100%;
+    filter: grayscale(50%);
+}
+/* ------------------------------------------------------- */
+
+#footer {
+    padding: 64px 16px;
+    text-align: center;
+} 
+
+#footer .socials-list a {
+    text-decoration: none;
+    color: #757575;
+    font-size: 20px;
+    
+}
+
+#footer .copyrights a:hover,
+#footer .socials-list a:hover {
+    opacity: 0.7;
+}
+
+#footer .copyrights, a{
+    padding: 16px 0;
+    font-size: 15px;
+    text-decoration: none;
+    color: #757575;
+}
+/* ------------------------------------------------------- */
+
+.modal.open{
+    display: flex;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-container {
+    background-color: #fff;
+    width: 900px;
+    max-width: calc(100% - 32px);
+    min-height: 200px;
+    animation: modalFadeIn ease 0.5s;
+}
+
+.modal-close {
+    float: right;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.modal-close:hover {
+    background-color: #f44336;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 42px 16px;
+    background-color: #009688;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.modal-body {
+    padding: 16px;
+}
+
+.modal-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.modal-input {
+    display: block;
+    border: 1px solid #ccc;
+    margin-bottom: 24px;
+    width: 100%;
+    padding: 12px 8px;
+    font-size: 15px;
+}
+
+#modal-buy-tickets {
+    width: 100%;
+    height: 48px;
+    color: #fff;
+    background-color: #009688;
+    border: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#modal-buy-tickets:hover {
+    cursor: pointer;
+    opacity: 0.8;;
+}
+
+.modal-footer{
+    text-align: right;  
+    padding: 0 16px;
+    margin-bottom: 16px;
+    font-size: 15px
+}
+
+.modal-footer a {
+    color: #009688;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------- */
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
